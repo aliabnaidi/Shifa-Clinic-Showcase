@@ -1,13 +1,4 @@
 <div dir="rtl" align="right">
-# الوصف الوظيفي والتقني لمشروع شفاء — Shifa
-
-**اسم المشروع:** شفاء — Shifa  
-**الإصدار الموصوف:** 1.0.2  
-**نوع النظام:** تطبيق مكتبي لإدارة العيادات وتنظيم الإجراءات الطبية والإدارية والمالية.  
-**بيئة التشغيل المستهدفة:** Windows 10 وWindows 11، بمعمارية 64 بت.  
-**المطوّر:** علي راغب العايدي  
-**حساب المطوّر:** https://github.com/aliabnaidi
-
 ## 1. التعريف بالمشروع
 
 شفاء هو نظام مكتبي يهدف إلى تنظيم العمل اليومي داخل العيادات، من خلال ربط تسجيل المراجعين والتقييم التمريضي والكشف الطبي والحسابات وتنفيذ العلاج ضمن مسار عمل واحد.
@@ -360,14 +351,6 @@
 
 ## English a description :
 
-# Functional and Technical Overview of the Shifa Project
-
-**Project Name:** Shifa — شفاء  
-**Version Covered:** 1.0.2  
-**System Type:** A desktop application for clinic management and the coordination of clinical, administrative, and financial workflows.  
-**Target Operating Environment:** Windows 10 and Windows 11, 64-bit architecture.  
-**Developer:** Ali Ragheb Al-Aidi  
-**Developer’s GitHub Profile:** https://github.com/aliabnaidi
 
 ## 1. Project Overview
 
