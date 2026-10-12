@@ -1,0 +1,15 @@
+bin/
+obj/
+publish/
+*.user
+*.suo
+*.pdb
+*.bak*
+*.before_*
+Shifa-Setup-x64.exe
+mediflow-data*.json
+sync-settings.json
+Recordings/
+LabResults/
+ClinicFiles/
+.env

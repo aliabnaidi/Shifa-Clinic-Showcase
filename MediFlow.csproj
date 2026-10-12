@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Version>1.0.2</Version>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets\ShifaApp.ico</ApplicationIcon>
+    <EnableDefaultApplicationDefinition>true</EnableDefaultApplicationDefinition>
+    <EnableDefaultPageItems>true</EnableDefaultPageItems>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Update="Assets/Success.lottie" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets/MedicalAmbient.wav" />
+    <Resource Include="Assets/UI_Click.wav" />
+    <Resource Include="Assets/UI_Notify.wav" />
+    <Resource Include="Assets/LoginSuccess.wav" />
+    <Content Include="Assets/Line waves animation background.lottie">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets/Background.lottie">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,227 @@
+<Window x:Class="MediFlow.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:v="clr-namespace:MediFlow.Views" Title="عيادات شفاء التجريبية | شفاء" WindowState="Maximized" ResizeMode="NoResize" WindowStyle="None" Background="#F4F8FC" FlowDirection="RightToLeft">
+<Window.Resources>
+  <Style x:Key="SidebarButton" TargetType="Button">
+    <Setter Property="Height" Value="58"/>
+    <Setter Property="Margin" Value="0,4"/>
+    <Setter Property="Padding" Value="18,8"/>
+    <Setter Property="HorizontalContentAlignment" Value="Right"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Foreground" Value="#203449"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="FontFamily" Value="Segoe UI"/>
+    <Setter Property="FontSize" Value="14"/>
+    <Setter Property="FontWeight" Value="Normal"/>
+    <Setter Property="Cursor" Value="Hand"/>
+    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Border x:Name="SideBorder"
+                  Background="{TemplateBinding Background}"
+                  CornerRadius="11"
+                  Padding="{TemplateBinding Padding}">
+            <Grid>
+              <Border x:Name="ActiveMark" Width="4" HorizontalAlignment="Right"
+                      Background="#F1F5F9" CornerRadius="2" Opacity="0"
+                      Margin="-10,8,0,8"/>
+              <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+            </Grid>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="SideBorder" Property="Background" Value="#EAF4F7"/>
+              <Setter Property="Foreground" Value="#203449"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+              <Setter TargetName="SideBorder" Property="Background" Value="#EAF4F7"/>
+            </Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+              <Setter TargetName="SideBorder" Property="Background" Value="#EAF4F7"/>
+              <Setter Property="Foreground" Value="#203449"/>
+              <Setter TargetName="ActiveMark" Property="Opacity" Value="1"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter TargetName="SideBorder" Property="Opacity" Value="0.45"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+    <Style x:Key="StaffPortalTabsStyle" TargetType="TabControl"><Setter Property="Background" Value="Transparent"/><Setter Property="BorderThickness" Value="0"/><Setter Property="Template"><Setter.Value><ControlTemplate TargetType="TabControl"><Grid><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions><Border Grid.Row="0" Background="White" BorderBrush="#DCE8F0" BorderThickness="1" CornerRadius="15" Padding="7" Margin="14,10,14,0"><ItemsPresenter/></Border><ContentPresenter Grid.Row="1" x:Name="PART_SelectedContentHost" ContentSource="SelectedContent"/></Grid></ControlTemplate></Setter.Value></Setter><Setter Property="ItemsPanel"><Setter.Value><ItemsPanelTemplate><StackPanel Orientation="Horizontal"/></ItemsPanelTemplate></Setter.Value></Setter></Style>
+  <Style x:Key="StaffPortalTabStyle" TargetType="TabItem"><Setter Property="Padding" Value="20,10"/><Setter Property="Margin" Value="3"/><Setter Property="Background" Value="#F1F6FA"/><Setter Property="Foreground" Value="#587286"/><Setter Property="BorderBrush" Value="#DCE8F0"/><Setter Property="BorderThickness" Value="1"/><Setter Property="FontSize" Value="14"/><Setter Property="FontWeight" Value="SemiBold"/><Setter Property="Template"><Setter.Value><ControlTemplate TargetType="TabItem"><Border x:Name="TabSurface" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10" Padding="{TemplateBinding Padding}"><ContentPresenter ContentSource="Header" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border><ControlTemplate.Triggers><Trigger Property="IsSelected" Value="True"><Setter TargetName="TabSurface" Property="Background" Value="#087F8C"/><Setter TargetName="TabSurface" Property="BorderBrush" Value="#087F8C"/><Setter Property="Foreground" Value="White"/></Trigger><Trigger Property="IsMouseOver" Value="True"><Setter TargetName="TabSurface" Property="Opacity" Value="0.86"/></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter></Style>  <Storyboard x:Key="LoginSuccessEntrance">
+        <DoubleAnimation Storyboard.TargetName="SuccessBackdrop" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.16"/>
+        <DoubleAnimation Storyboard.TargetName="SuccessCard" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.22" BeginTime="0:0:0.03"/>
+        <DoubleAnimation Storyboard.TargetName="SuccessCardScale" Storyboard.TargetProperty="ScaleX" From="0.96" To="1" Duration="0:0:0.24" BeginTime="0:0:0.03" DecelerationRatio="0.8"/>
+        <DoubleAnimation Storyboard.TargetName="SuccessCardScale" Storyboard.TargetProperty="ScaleY" From="0.96" To="1" Duration="0:0:0.24" BeginTime="0:0:0.03" DecelerationRatio="0.8"/>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="SuccessStickerScale" Storyboard.TargetProperty="ScaleX">
+            <DiscreteDoubleKeyFrame KeyTime="0:0:0.10" Value="0.55"/>
+            <SplineDoubleKeyFrame KeyTime="0:0:0.34" Value="1.08" KeySpline="0.18,0.85,0.35,1"/>
+            <SplineDoubleKeyFrame KeyTime="0:0:0.46" Value="1" KeySpline="0.2,0.9,0.3,1"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="SuccessStickerScale" Storyboard.TargetProperty="ScaleY">
+            <DiscreteDoubleKeyFrame KeyTime="0:0:0.10" Value="0.55"/>
+            <SplineDoubleKeyFrame KeyTime="0:0:0.34" Value="1.08" KeySpline="0.18,0.85,0.35,1"/>
+            <SplineDoubleKeyFrame KeyTime="0:0:0.46" Value="1" KeySpline="0.2,0.9,0.3,1"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimation Storyboard.TargetName="SuccessSticker" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.16" BeginTime="0:0:0.10"/>
+        <DoubleAnimation Storyboard.TargetName="CheckMarkScale" Storyboard.TargetProperty="ScaleX" From="0.35" To="1" Duration="0:0:0.24" BeginTime="0:0:0.18" DecelerationRatio="0.75"/>
+        <DoubleAnimation Storyboard.TargetName="CheckMarkScale" Storyboard.TargetProperty="ScaleY" From="0.35" To="1" Duration="0:0:0.24" BeginTime="0:0:0.18" DecelerationRatio="0.75"/>
+        <DoubleAnimation Storyboard.TargetName="SuccessRing" Storyboard.TargetProperty="Opacity" From="0.9" To="0" Duration="0:0:0.42" BeginTime="0:0:0.16"/>
+        <DoubleAnimation Storyboard.TargetName="SuccessRingScale" Storyboard.TargetProperty="ScaleX" From="0.72" To="1.35" Duration="0:0:0.42" BeginTime="0:0:0.16"/>
+        <DoubleAnimation Storyboard.TargetName="SuccessRingScale" Storyboard.TargetProperty="ScaleY" From="0.72" To="1.35" Duration="0:0:0.42" BeginTime="0:0:0.16"/>
+    </Storyboard>
+</Window.Resources>
+<Grid Background="#F4F8FC" FlowDirection="LeftToRight"><v:LoginView x:Name="LoginView" LoginRequested="Login_LoginRequested" MinimizeRequested="Minimize_Click" CloseRequested="Close_Click"/>
+<Grid x:Name="GeneralContainer" Visibility="Collapsed" Margin="0"><v:DoctorDashboardView x:Name="GeneralDoctor" HomeRequested="Sidebar_Home_Click" OpenPatientRequested="Doctor_OpenPatient" AudioHistoryRequested="Doctor_AudioHistory" StartVisitRequested="Doctor_StartVisit" PatientsRequested="Doctor_Patients" VisitsRequested="Doctor_Visits" AppointmentsRequested="Doctor_Appointments" MedicationsRequested="Doctor_Medications" InventoryRequested="Doctor_Inventory" TreatmentsRequested="Doctor_Treatments" LabRequested="Doctor_Lab" ReportsRequested="Doctor_Reports" SettingsRequested="Doctor_Settings" AttachmentsRequested="Doctor_Attachments" SickLeaveRequested="Doctor_SickLeave" LogoutRequested="Doctor_Logout"/></Grid>
+<Grid x:Name="DentalContainer" Visibility="Collapsed" Margin="0"><v:DoctorDashboardView x:Name="DentalDoctor" HomeRequested="Sidebar_Home_Click" OpenPatientRequested="Doctor_OpenPatient" AudioHistoryRequested="Doctor_AudioHistory" StartVisitRequested="Doctor_StartVisit" PatientsRequested="Doctor_Patients" VisitsRequested="Doctor_Visits" AppointmentsRequested="Doctor_Appointments" MedicationsRequested="Doctor_Medications" InventoryRequested="Doctor_Inventory" TreatmentsRequested="Doctor_Treatments" LabRequested="Doctor_Lab" ReportsRequested="Doctor_Reports" SettingsRequested="Doctor_Settings" AttachmentsRequested="Doctor_Attachments" SickLeaveRequested="Doctor_SickLeave" LogoutRequested="Doctor_Logout"/></Grid>
+<Grid x:Name="GyneContainer" Visibility="Collapsed" Margin="0"><v:DoctorDashboardView x:Name="GyneDoctor" HomeRequested="Sidebar_Home_Click" OpenPatientRequested="Doctor_OpenPatient" AudioHistoryRequested="Doctor_AudioHistory" StartVisitRequested="Doctor_StartVisit" PatientsRequested="Doctor_Patients" VisitsRequested="Doctor_Visits" AppointmentsRequested="Doctor_Appointments" MedicationsRequested="Doctor_Medications" InventoryRequested="Doctor_Inventory" TreatmentsRequested="Doctor_Treatments" LabRequested="Doctor_Lab" ReportsRequested="Doctor_Reports" SettingsRequested="Doctor_Settings" AttachmentsRequested="Doctor_Attachments" SickLeaveRequested="Doctor_SickLeave" LogoutRequested="Doctor_Logout"/></Grid>
+<Grid x:Name="PatientsContainer" Visibility="Collapsed" Margin="0"><v:SectionView x:Name="PatientsSection" BackRequested="Section_Back" ActionRequested="Section_Action"/></Grid>
+<Grid x:Name="VisitsContainer" Visibility="Collapsed" Margin="0"><v:SectionView x:Name="VisitsSection" BackRequested="Section_Back" ActionRequested="Section_Action"/></Grid>
+<Grid x:Name="AppointmentsContainer" Visibility="Collapsed" Margin="0"><v:SectionView x:Name="AppointmentsSection" BackRequested="Section_Back" ActionRequested="Section_Action"/></Grid>
+<Grid x:Name="MedicationsContainer" Visibility="Collapsed" Margin="0"><v:SectionView x:Name="MedicationsSection" BackRequested="Section_Back" ActionRequested="Section_Action"/></Grid>
+<Grid x:Name="InventoryContainer" Visibility="Collapsed" Margin="0"><v:SectionView x:Name="InventorySection" BackRequested="Section_Back" ActionRequested="Section_Action"/></Grid>
+<Grid x:Name="TreatmentsContainer" Visibility="Collapsed" Margin="0"><v:TreatmentDosageView x:Name="TreatmentsSection" BackRequested="Section_Back"/></Grid>
+<Grid x:Name="AudioHistoryContainer" Visibility="Collapsed" Margin="0"><v:SectionView x:Name="AudioHistorySection" BackRequested="Section_Back" ActionRequested="Section_Action"/></Grid>
+<Grid x:Name="LabContainer" Visibility="Collapsed" Margin="0"><v:SectionView x:Name="LabSection" BackRequested="Section_Back" ActionRequested="Section_Action"/></Grid>
+<Grid x:Name="ReportsContainer" Visibility="Collapsed" Margin="0"><v:SectionView x:Name="ReportsSection" BackRequested="Section_Back" ActionRequested="Section_Action"/></Grid>
+<Grid x:Name="SettingsContainer" Visibility="Collapsed" Margin="0"><v:SectionView x:Name="SettingsSection" BackRequested="Section_Back" ActionRequested="Section_Action"/></Grid>
+<Grid x:Name="SickLeaveContainer" Visibility="Collapsed" Margin="0"><v:SectionView x:Name="SickLeaveSection" BackRequested="Section_Back" ActionRequested="Section_Action"/></Grid>
+<Grid x:Name="FilesContainer" Visibility="Collapsed" Margin="0"><v:SectionView x:Name="FilesSection" BackRequested="Section_Back" ActionRequested="Section_Action"/></Grid>
+<Grid x:Name="StaffPortalContainer" Visibility="Collapsed" Margin="0"><TabControl x:Name="StaffPortalTabs" FlowDirection="RightToLeft" Background="Transparent" Style="{StaticResource StaffPortalTabsStyle}" ItemContainerStyle="{StaticResource StaffPortalTabStyle}"><TabItem x:Name="StaffReceptionTab" Header="الاستقبال والمحاسبة"/><TabItem x:Name="StaffNursingTab" Header="التمريض"/></TabControl></Grid>
+<Grid x:Name="ManagerContainer" Visibility="Collapsed" Margin="0"><v:ManagerDashboardView x:Name="ManagerDashboard" LogoutRequested="Manager_Logout" OpenPatientRequested="Manager_OpenPatient"/></Grid>
+<Grid x:Name="NursingContainer" Visibility="Collapsed" Margin="0"><v:NursingDashboardView x:Name="NursingDashboard" LogoutRequested="Nursing_Logout"/></Grid>
+<Grid x:Name="ProfileContainer" Visibility="Collapsed" Margin="0"><v:PatientProfileView x:Name="PatientProfile" BackRequested="Profile_Back" StartVisitRequested="Profile_StartVisit"/></Grid>
+<Grid x:Name="VisitEditorContainer" Visibility="Collapsed" Margin="0"><v:CurrentVisitView x:Name="VisitEditor" BackRequested="Visit_Back" SendToReceptionRequested="Visit_SendToReception" VisitUpdatedRequested="Visit_Updated"/></Grid>
+<Grid x:Name="MedicalFormContainer" Visibility="Collapsed" Margin="0"><v:MedicalFormView x:Name="MedicalForm" BackRequested="MedicalForm_Back"/></Grid>
+<Grid x:Name="ReceptionContainer" Visibility="Collapsed" Margin="0"><v:ReceptionView x:Name="Reception" LogoutRequested="Reception_Logout" PatientCreated="Reception_PatientCreated" PaymentRequested="Reception_PaymentRequested" OpenVisitFormRequested="Reception_OpenVisitForm" PrintVisitFormRequested="Reception_PrintVisitForm"/></Grid>
+
+<!-- Shared navigation matching the supplied Clinicti reference -->
+<Grid x:Name="AppSidebar" Width="260" HorizontalAlignment="Right" Background="#F4F8FC"
+      Visibility="Collapsed" Panel.ZIndex="100" FlowDirection="RightToLeft">
+  <Grid.RowDefinitions>
+    <RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/>
+  </Grid.RowDefinitions>
+  <StackPanel Grid.Row="0" Margin="18,22,18,18">
+    <TextBlock Text="شفاء" Foreground="#203449" FontSize="23" FontWeight="Bold" HorizontalAlignment="Center"/>
+    <TextBlock Text="نظام إدارة العيادة" Foreground="#71869A" FontSize="10" HorizontalAlignment="Center" Margin="0,2,0,0"/>
+  </StackPanel>
+  <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+    <StackPanel Margin="12,8,12,8">
+      <Button Content="⌂   الرئيسية" Click="Sidebar_Home_Click" Style="{StaticResource SidebarButton}"/>
+      <Button Content="♙   المرضى" Click="Sidebar_Patients_Click" Style="{StaticResource SidebarButton}"/>
+      <Button Content="▦   المواعيد" Click="Sidebar_Appointments_Click" Style="{StaticResource SidebarButton}"/>
+      <Button Content="▤   الزيارات" Click="Sidebar_Visits_Click" Style="{StaticResource SidebarButton}"/>
+      <Button Content="✚   قسم الأدوية" Click="Sidebar_Medications_Click" Style="{StaticResource SidebarButton}"/>
+      <Button Content="⚕   العلاجات ومعادلات الجرعات" Click="Sidebar_Treatments_Click" Style="{StaticResource SidebarButton}"/>
+      <Button Content="▦   مخزون العيادة" Click="Sidebar_Inventory_Click" Style="{StaticResource SidebarButton}"/>
+      <Button Content="◇   المختبر" Click="Sidebar_Lab_Click" Style="{StaticResource SidebarButton}"/>
+      <Button Content="▧   التقارير والتحليلات" Click="Sidebar_Reports_Click" Style="{StaticResource SidebarButton}"/>
+      <Button Content="▧   الملفات والمرفقات" Click="Sidebar_Attachments_Click" Style="{StaticResource SidebarButton}"/>
+      <Button Content="⚙   إعدادات الطبيب" Click="Sidebar_Settings_Click" Style="{StaticResource SidebarButton}"/>
+      <Button Content="▥   الإجازات المرضية" Click="Sidebar_SickLeave_Click" Style="{StaticResource SidebarButton}"/>
+      <Border Height="1" Background="#F4F8FC" Margin="4,10,4,10"/>
+      <TextBlock Text="إجراءات سريعة" Foreground="#71869A" FontSize="11" FontWeight="SemiBold" Margin="8,0,8,5"/>
+      <Button Content="✚   تسجيل مريض جديد" Click="Sidebar_Register_Click" Style="{StaticResource SidebarButton}" Background="#247EAA" Foreground="#203449" FontWeight="SemiBold"/>
+      <Button Content="⚕   بدء الاستشارة" Click="Sidebar_StartVisit_Click" Style="{StaticResource SidebarButton}" Background="#EAF4F7" Foreground="#EAF4F7"/>
+      <Button Content="◈   سجل الوصفات" Click="Sidebar_PrescriptionHistory_Click" Style="{StaticResource SidebarButton}" Background="#EAF4F7" Foreground="#EAF4F7"/>
+      <Button Content="▤   إصدار إجازة مرضية" Click="Sidebar_IssueSickLeave_Click" Style="{StaticResource SidebarButton}" Background="#EAF4F7" Foreground="#EAF4F7"/>
+    </StackPanel>
+  </ScrollViewer>
+  <StackPanel Grid.Row="2" Margin="12,12,12,20">
+    <Border Height="1" Background="#F4F8FC" Margin="4,0,4,12"/>
+    <Button Content="⇥   تسجيل الخروج" Click="Sidebar_Logout_Click" Style="{StaticResource SidebarButton}"/>
+  </StackPanel>
+</Grid>
+
+<!-- Lightweight post-login confirmation -->
+<Grid x:Name="LoginSuccessOverlay" Visibility="Collapsed" Panel.ZIndex="500" FlowDirection="RightToLeft">
+    <Border x:Name="SuccessBackdrop" Background="#F4F8FC" Opacity="0"/>
+    <Border x:Name="SuccessCard" Width="470" MinHeight="390" HorizontalAlignment="Center" VerticalAlignment="Center"
+            Background="#F4F8FC" BorderBrush="#EAF4F7" BorderThickness="1" CornerRadius="24" Padding="34" Opacity="0">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="22" ShadowDepth="4" Opacity="0.28" Color="#203449"/>
+        </Border.Effect>
+        <Border.RenderTransform>
+            <ScaleTransform x:Name="SuccessCardScale" ScaleX="0.94" ScaleY="0.94" CenterX="235" CenterY="195"/>
+        </Border.RenderTransform>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Width="86" Height="86" HorizontalAlignment="Center">
+                <Ellipse x:Name="SuccessRing" Width="78" Height="78" HorizontalAlignment="Center" VerticalAlignment="Center"
+                         Stroke="#B5DCE4" StrokeThickness="1.5" Opacity="0.9">
+                    <Ellipse.RenderTransform>
+                        <ScaleTransform x:Name="SuccessRingScale" ScaleX="0.72" ScaleY="0.72" CenterX="39" CenterY="39"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Border x:Name="SuccessSticker" Width="66" Height="66" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Background="#F4F8FC" BorderBrush="#B5DCE4" BorderThickness="1.5" CornerRadius="33" Opacity="0">
+                    <Border.RenderTransform>
+                        <ScaleTransform x:Name="SuccessStickerScale" ScaleX="0.55" ScaleY="0.55" CenterX="33" CenterY="33"/>
+                    </Border.RenderTransform>
+                    <Grid>
+                        <Ellipse Fill="#B5DCE4" Opacity="0.08" Margin="4"/>
+                        <TextBlock x:Name="CheckMark" Text="✓" Foreground="#203449" FontFamily="Georgia" FontSize="34" FontWeight="Bold"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock.RenderTransform>
+                                <ScaleTransform x:Name="CheckMarkScale" ScaleX="0.35" ScaleY="0.35" CenterX="0.5" CenterY="0.5"/>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                    </Grid>
+                </Border>
+            </Grid>
+            <TextBlock Grid.Row="1" Text="تم تسجيل الدخول بنجاح" Foreground="#173345" FontFamily="Segoe UI" FontSize="23" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,20,0,4"/>
+            <TextBlock Grid.Row="2" Text="أهلًا بك في شفاء" Foreground="#71869A" FontFamily="Segoe UI" FontSize="14" HorizontalAlignment="Center" Margin="0,0,0,24"/>
+
+            <Grid Grid.Row="3" Margin="0,0,0,9">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="130"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="الدور" Foreground="#71869A" FontFamily="Segoe UI" FontSize="12"/>
+                <TextBlock x:Name="SuccessRoleText" Grid.Column="1" Text="طبيب" Foreground="#173345" FontFamily="Segoe UI" FontSize="14"/>
+            </Grid>
+            <Grid Grid.Row="4" Margin="0,0,0,9">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="130"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="الاسم" Foreground="#71869A" FontFamily="Segoe UI" FontSize="12"/>
+                <TextBlock x:Name="SuccessNameText" Grid.Column="1" Text="طبيب تجريبي عام" Foreground="#173345" FontFamily="Segoe UI" FontSize="14"/>
+            </Grid>
+            <Grid Grid.Row="5" Margin="0,0,0,9">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="130"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="القسم" Foreground="#71869A" FontFamily="Segoe UI" FontSize="12"/>
+                <TextBlock x:Name="SuccessDepartmentText" Grid.Column="1" Text="الطب البشري والعام" Foreground="#173345" FontFamily="Segoe UI" FontSize="14" TextWrapping="Wrap"/>
+            </Grid>
+            <Grid Grid.Row="6" Margin="0,0,0,22">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="130"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="التاريخ والوقت" Foreground="#71869A" FontFamily="Segoe UI" FontSize="12"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock x:Name="SuccessDateText" Text="02/10/2026" Foreground="#173345" FontFamily="Segoe UI" FontSize="14"/>
+                    <TextBlock Text="  •  " Foreground="#71869A" FontFamily="Segoe UI" FontSize="12"/>
+                    <TextBlock x:Name="SuccessTimeText" Text="01:00 ص" Foreground="#173345" FontFamily="Segoe UI" FontSize="14"/>
+                </StackPanel>
+            </Grid>
+
+            <Button Grid.Row="7" Content="متابعة إلى النظام  ✓" Click="LoginSuccessDone_Click" Height="48" Background="#087F8C" Foreground="White" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" FontWeight="SemiBold" Cursor="Hand">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="12" Padding="18,0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+    </Border>
+</Grid>
+</Grid></Window>
+
